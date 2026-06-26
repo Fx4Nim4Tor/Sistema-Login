@@ -1,4 +1,5 @@
 from flask import request
+from services.registro import registrar
 
 def registrar_rotas(app):
 
@@ -11,4 +12,12 @@ def registrar_rotas(app):
         print(nome)
         print(senha)
 
-        return "Recebido"
+        registrar(nome, senha)
+
+        return "ok"
+    
+    # @app.post("/teste")
+    # def teste():
+    #     print ("aaaaaa")
+
+    #     return "Recebido"

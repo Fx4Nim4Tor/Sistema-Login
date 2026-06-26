@@ -1,5 +1,3 @@
-console.log("registro.js carregado");
-
 const form = document.getElementById("formRegistro");
 
 form.addEventListener("submit", async (e) => {
