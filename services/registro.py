@@ -17,11 +17,29 @@ def registrar(nome, senha):
 
     cursor.execute(
         """
-        INSERT INTO usuarios(nome, senha)
-        VALUES (?, ?)
+        SELECT * FROM usuarios
+        WHERE nome = ?
         """,
-        (nome, senha)
+        (nome,)
     )
+
+    usuario = cursor.fetchone()
+
+    if usuario:
+        print("Já existe um usuário com esse nome.")
+    else:
+        print("Nome disponível.")
+        cursor.execute(
+            """
+            INSERT INTO usuarios(nome, senha)
+            VALUES (?, ?)
+            """,
+            (nome, senha)
+        )
+
+
+
+    
 
     conexao.commit()
     conexao.close()

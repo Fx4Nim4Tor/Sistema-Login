@@ -5,9 +5,12 @@ app = Flask(__name__)
 @app.get("/")
 def home():
     return render_template("registro.html")
+    
 
-from API.registro import registrar_rotas
-registrar_rotas(app)
+
+
+from API.registro import rota_registro
+rota_registro(app)
 
 if __name__ == "__main__":
     app.run(debug=True)
