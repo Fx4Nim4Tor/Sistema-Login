@@ -1,45 +1,13 @@
 from database.database import conectar
-
+from models.usuario import criar_tabela_usuario,inserir_usuario,buscar_usuario
 
 def registrar(nome, senha):
-
     conexao = conectar()
-
     cursor = conexao.cursor()
 
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS usuarios(
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nome TEXT NOT NULL,
-            senha TEXT NOT NULL
-        )
-    """)
-
-    cursor.execute(
-        """
-        SELECT * FROM usuarios
-        WHERE nome = ?
-        """,
-        (nome,)
-    )
-
-    usuario = cursor.fetchone()
-
-    if usuario:
-        print("Já existe um usuário com esse nome.")
-    else:
-        print("Nome disponível.")
-        cursor.execute(
-            """
-            INSERT INTO usuarios(nome, senha)
-            VALUES (?, ?)
-            """,
-            (nome, senha)
-        )
-
-
-
-    
+    # tem que testar as coisas necessarias para senha tipo se tem maiusculo essas coisas
+    criar_tabela_usuario(cursor)
+    inserir_usuario(cursor,nome,senha)
 
     conexao.commit()
     conexao.close()

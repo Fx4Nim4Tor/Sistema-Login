@@ -6,10 +6,11 @@ app = Flask(__name__)
 def home():
     return render_template("registro.html")
     
+@app.get("/login")
+def login():
+    return render_template("login.html")
 
-
-
-from API.registro import rota_registro
+from API.API_registro import rota_registro
 rota_registro(app)
 
 if __name__ == "__main__":

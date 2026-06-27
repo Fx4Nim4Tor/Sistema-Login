@@ -17,7 +17,6 @@ def rota_registro(app):
             raise HTTPException(status_code=400, detail="senha nao informada")
 
         
-
         registrar(nome, senha)
 
         return "ok"
