@@ -10,5 +10,11 @@ form.addEventListener("submit", async (e) => {
         body: dados
     });
 
+    if (resposta.ok) {
+        window.location.href = "/home";
+    } else {
+        alert(await resposta.text());
+    }
+
     console.log(await resposta.text());
 });

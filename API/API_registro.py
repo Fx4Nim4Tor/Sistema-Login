@@ -1,5 +1,4 @@
 from flask import request
-from fastapi import HTTPException
 
 from services.registro import registrar
 
@@ -8,13 +7,13 @@ def rota_registro(app):
     @app.post("/registro")
     def registro():
 
-        nome = request.form["nome"]
-        senha = request.form["password"]
+        nome = request.form.get("nome")
+        senha = request.form.get("password")
 
         if not nome:
-            raise HTTPException(status_code=400, detail="nome nao informado")
+            return "Nome não informado", 400
         if not senha:
-            raise HTTPException(status_code=400, detail="senha nao informada")
+            return "Senha não informada", 400
 
         
         registrar(nome, senha)

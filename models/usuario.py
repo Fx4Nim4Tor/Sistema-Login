@@ -42,13 +42,11 @@ def buscar_usuario(cursor, nome, senha):
         """,
         (nome,)
     )
-
     usuario = cursor.fetchone()
     if usuario:
-        # o usuario exite
-        from services.hash import verifica_senha
-        verifica_senha(senha)
-        print(senha,"entrou")
+        return usuario
+    else:
+        print("USUARIO NAO EXISTE")
 
+    
 
-    print("testeeeeeeeeeee",usuario)
