@@ -1,6 +1,6 @@
 from database.database import conectar
 from models.usuario import buscar_usuario
-
+from services.hash import verifica_senha
 
 def logar(nome, senha):
     conexao = conectar()
@@ -9,13 +9,15 @@ def logar(nome, senha):
     print("TESTE ENTROU NO SERVICE LOGIN")
     usuario = buscar_usuario(cursor, nome, senha)
     
-    from services.hash import verifica_senha
+    if usuario is None:
+        conexao.close()
+        return False
+
     if verifica_senha(senha,usuario) == True:
-        print ("Aaaaaaaaa")
         return True
     
 
     conexao.commit()
     conexao.close()
 
-    return "ok"
+    return "Usuário ou senha inválidos", 401

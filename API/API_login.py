@@ -1,4 +1,4 @@
-from flask import request
+from flask import request,session
 
 from services.login import logar
 
@@ -16,6 +16,7 @@ def rota_login(app):
         print("ENTROU NA API")
 
         if logar(nome, senha):
+            session["usuario"] = nome
             return "", 200
 
         return "Usuário ou senha inválidos", 401

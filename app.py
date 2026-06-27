@@ -1,6 +1,21 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,redirect,session
 
 app = Flask(__name__)
+
+#Vou deixar no no git mas o certo seria fazer isso:
+
+#pip install python-dotenv
+#criar secret key no .env
+#SECRET_KEY=chave_secreta
+#
+# import os
+# from dotenv import load_dotenv
+# load_dotenv()
+
+# app.secret_key = os.getenv("SECRET_KEY")
+
+app.secret_key = "uma-chave-secreta-bem-grande"
+
 
 #TELAS
 @app.get("/")
@@ -13,6 +28,10 @@ def login_tela():
 
 @app.get("/home")
 def home_tela():
+    #redireciona se nao tiver logado
+    if "usuario" not in session:
+        return redirect("/login")
+
     return render_template("home.html")
 
 #APIs
